@@ -1,0 +1,284 @@
+// const id = 4;
+// const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+// const user = await res.json();
+
+// console.log(user);
+
+// async function getUser() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/users/1",
+//     );
+//     if (!response.ok) {
+//       throw new Error(`Request failed with status: ${response.status}`);
+//     }
+//     const user = await response.json();
+//     console.log(user);
+//   } catch (error) {
+//     console.log("Something Went Wrong", error);
+//   }
+// }
+// getUser();
+
+// fetch("https://jsonplaceholder.typicode.com/posts/5")
+//   .then((r) => r.json())
+//   .then((d) => console.log(d.title));
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((r) => r.json())
+//   .then((d) => console.log("Total todos:", d.length));
+
+// fetch("https://jsonplaceholder.typicode.com/comments/1")
+//   .then((r) => r.json())
+//   .then((d) => console.log(d.email, d.body));
+
+//*****************POST Method***********/
+
+// async function UserRun() {
+//   const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+//     method: "POST",
+//     headers: { "content-type": "application/json" },
+//     body: JSON.stringify({
+//       title: "My first post",
+//       body: "Hello Hamamd",
+//       userId: 1,
+//     }),
+//   });
+
+//   const data = await response.json();
+
+//   console.log(data);
+// }
+
+// UserRun();
+
+// ************** GET Method ******************
+
+// async function Run() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/1",
+//     );
+//     if (!response.ok) {
+//       throw new Error(`Something went wrong : ${response.status}`);
+//     }
+//     const data = await response.json();
+
+//     console.log("Get Result:", data);
+//   } catch (error) {
+//     console.log("Something went wrong :", error);
+//   }
+// }
+// Run();
+
+// *******************POST Method********************
+
+// async function Run() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+//       method: "POST",
+//       headers: { "content-type": "application/json" },
+//       body: JSON.stringify({
+//         userId: 1,
+//         title: "Hammad",
+//         body: "Hello hamad how are you ?",
+//       }),
+//     });
+//     const data = await response.json();
+//     console.log("Data succesfully updated:", data);
+//   } catch (error) {
+//     console.log("Something went wrong :", error);
+//   }
+// }
+// Run();
+
+// **********************PUT Method *******************
+
+// async function Run() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/1",
+//       {
+//         method: "PUT",
+//         headers: { "content-type": "application/json" },
+//         body: JSON.stringify({
+//           userId: 1,
+//           title: "Hammad",
+//           body: "Hello hamad how are you ?",
+//         }),
+//       },
+//     );
+//     const data = await response.json();
+//     console.log("Data succesfully updated:", data);
+//   } catch (error) {
+//     console.log("Something went wrong :", error);
+//   }
+// }
+// Run();
+
+// **********************PATCH Method *******************
+
+// async function Run() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/1",
+//       {
+//         method: "PATCH",
+//         headers: { "content-type": "application/json" },
+//         body: JSON.stringify({
+//           title: "Hammad",
+//         }),
+//       },
+//     );
+//     const data = await response.json();
+//     console.log("Data succesfully updated:", data);
+//   } catch (error) {
+//     console.log("Something went wrong :", error);
+//   }
+// }
+// Run();
+
+// *******************DELETE **************
+
+// async function run() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/1",
+//       {
+//         method: "DELETE",
+//       },
+//     );
+//     if (!response.ok) {
+//       throw new Error("Something went wrong :", response.status);
+//     }
+//     console.log("Delete sucessfully", await response.status);
+//     console.log("Body should be empty", await response.text());
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+// run();
+
+// ****************GET TEST****************
+
+// Fetch the user with ID 3 from https://jsonplaceholder.typicode.com/users/3 using GET
+
+// async function getUserPosts() {
+//   try {
+//     const response = await fetch("httpJGTRYU");
+//     if (!response.ok) {
+//       throw new Error(`Something Went wrong + ${response.status}`);
+//     }
+//     const user = await response.json();
+
+//     console.log(`Name: ${user.name}, Email: ${user.email}`);
+//   } catch (error) {
+//     console.log("Something went wrong", error);
+//   }
+// }
+// getUserPosts();
+
+// async function getUserPosts() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts?userId=3",
+//     );
+//     if (!response.ok) {
+//       throw new Error("Something Went wrong", response.status);
+//     }
+//     const user = await response.json();
+
+//     console.log(user.length);
+//   } catch (error) {
+//     console.log("Something went wrong", error);
+//   }
+// }
+// getUserPosts();
+
+// ******************Test Example filling ***************************
+// async function getUserPosts() {
+//   try {
+//     // Step 1: fetch user #3
+//     const userRes = await fetch("https://jsonplaceholder.typicode.com/users/3");
+//     if (!userRes.ok) throw new Error("User fetch failed: " + userRes.status);
+//     const user = await userRes.json();
+
+//     // Step 2: print name and email
+//     console.log("User:", user.name);
+//     console.log("Email:", user.email);
+
+//     // Step 3: fetch posts for this user
+//     const postsRes = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts?userId=3",
+//     );
+//     if (!postsRes.ok) throw new Error("Posts fetch failed: " + postsRes.status);
+//     const posts = await postsRes.json();
+
+//     // Step 4: print total count
+//     console.log("Total posts by this user:", posts.length);
+//   } catch (error) {
+//     console.log("Something went wrong:", error);
+//   }
+// }
+
+// // Step 5: call the function!
+// getUserPosts();
+
+// *******************Real Apis Practice*****************
+
+// async function getJoke() {
+//   try {
+//     const response = await fetch(
+//       "https://v2.jokeapi.dev/joke/Programming?type=single",
+//       {
+//         headers: { Accept: "application/json" },
+//       },
+//     );
+//     if (!response.ok) {
+//       throw new Error(`Something went wrong : ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log(data.joke);
+//   } catch(error) {
+//     console.log("Something went wrong:", error);
+//   }
+// }
+// getJoke();
+
+// ******************Weather Api*****************
+async function getWeather(city) {
+  const key = "Api_weather_key";
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Status: ${res.status}`);
+    }
+    const data = await res.json();
+    console.log(`City: ${data.name}`);
+    console.log(`Temp: ${data.main.temp}C`);
+    console.log(`Feel: ${data.main.feels_like}C`);
+    console.log(`Sky: ${data.weather[0].description}`);
+  } catch (error) {
+    console.log("Something went wrong", error.message);
+  }
+}
+getWeather("London");
+
+// async function checkThis() {
+//   try {
+//     const res = await fetch(
+//       "https://v2.jokeapi.dev/joke/Programming?type=single",
+//     );
+//     if (!res.ok) {
+//       throw new Error(`Status : ${res.status}`);
+//     }
+//     const data = await res.json();
+//     console.log(data.joke);
+//   } catch (error) {
+//     console.log("Something went wrong", error.message);
+//   }
+// }
+
+// checkThis();
