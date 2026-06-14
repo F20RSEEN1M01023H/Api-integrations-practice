@@ -300,7 +300,7 @@
 //       console.log(`POST Title: ${post.title}`);
 //     });
 //   } catch (error) {
-//     console.log(`Something went wrong : ${error.meesage}`);
+//     console.log(`Something went wrong : ${error.message}`);
 //   }
 // }
 
@@ -344,6 +344,7 @@
 //           userId: 5,
 //           title: "This is the Updated Post 5 Title",
 //           body: "This is the updated body content of the post",
+//  id:5,
 //         }),
 //       },
 //     );
@@ -358,28 +359,50 @@
 //   }
 // }
 // putPost();
-async function putPost() {
-  try {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/posts/5",
-      {
-        method: "PUT",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          userId: 5,
-          title: "This is the Updated Post 5 Title",
-          body: "This is the updated body content of the post",
-        }),
-      },
-    );
-    if (!response.ok) {
-      throw new Error(`Something went wrong Status : ${response.status}`);
-    }
-    const post = await response.json();
 
-    console.log("Updated Content below:", post);
-  } catch (error) {
-    console.log(`something went wrong : ${error}`);
-  }
-}
-putPost();
+// *********************PATCH TEST*********************
+
+// async function putPost() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/3",
+//       {
+//         method: "PATCH",
+//         headers: { "content-type": "application/json" },
+//         body: JSON.stringify({
+//           title: "This is the Updated Post 3 Only Title",
+//         }),
+//       },
+//     );
+//     if (!response.ok) {
+//       throw new Error(`Something went wrong Status : ${response.status}`);
+//     }
+//     const post = await response.json();
+
+//     console.log("Updated Content below:", post);
+//   } catch (error) {
+//     console.log(`something went wrong : ${error}`);
+//   }
+// }
+// putPost();
+
+// ****************DELETE******************
+
+// async function DelPost() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/7",
+//       {
+//         method: "DELETE",
+//       },
+//     );
+//     if (!response.ok) {
+//       throw new Error(`Something went wrong Status : ${response.status}`);
+//     }
+//     console.log("Delete Successfully", response.status);
+//     console.log("Body text should be Empty", await response.text());
+//   } catch (error) {
+//     console.log("Something went wrong :", error.message);
+//   }
+// }
+// DelPost();
