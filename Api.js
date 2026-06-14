@@ -246,25 +246,25 @@
 // getJoke();
 
 // ******************Weather Api*****************
-async function getWeather(city) {
-  const key = "Api_weather_key";
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
+// async function getWeather(city) {
+//   const key = "Api_weather_key";
+//   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`;
 
-  try {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`Status: ${res.status}`);
-    }
-    const data = await res.json();
-    console.log(`City: ${data.name}`);
-    console.log(`Temp: ${data.main.temp}C`);
-    console.log(`Feel: ${data.main.feels_like}C`);
-    console.log(`Sky: ${data.weather[0].description}`);
-  } catch (error) {
-    console.log("Something went wrong", error.message);
-  }
-}
-getWeather("London");
+//   try {
+//     const res = await fetch(url);
+//     if (!res.ok) {
+//       throw new Error(`Status: ${res.status}`);
+//     }
+//     const data = await res.json();
+//     console.log(`City: ${data.name}`);
+//     console.log(`Temp: ${data.main.temp}C`);
+//     console.log(`Feel: ${data.main.feels_like}C`);
+//     console.log(`Sky: ${data.weather[0].description}`);
+//   } catch (error) {
+//     console.log("Something went wrong", error.message);
+//   }
+// }
+// getWeather("London");
 
 // async function checkThis() {
 //   try {
@@ -282,3 +282,104 @@ getWeather("London");
 // }
 
 // checkThis();
+
+// *******************GET TEST ****************
+
+// async function getPosts() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+
+//     if (!response.ok) {
+//       throw new Error(`Something went Wrong and Status: ${response.status}`);
+//     }
+//     const posts = await response.json();
+//     console.log("-----------Post Content Below-----------");
+
+//     posts.slice(0, 3).forEach((post) => {
+//       console.log(`POST ID: ${post.id}`);
+//       console.log(`POST Title: ${post.title}`);
+//     });
+//   } catch (error) {
+//     console.log(`Something went wrong : ${error.meesage}`);
+//   }
+// }
+
+// getPosts();
+
+// ************************POST TEST************************
+// async function SendPost() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+//       method: "POST",
+//       headers: { "content-type": "application/json" },
+//       body: JSON.stringify({
+//         userId: 1,
+//         title: "Hammad Ashraf",
+//         body: "Hello Hammad how are you bro ?",
+//       }),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`Something went wrong status: ${response.status}`);
+//     }
+//     const post = await response.json();
+//     console.log(post);
+//   } catch (error) {
+//     console.log(`Something went wrong here: ${error}`);
+//   }
+// }
+
+// SendPost();
+
+// **********************PUT TEST******************
+
+// async function putPost() {
+//   try {
+//     const response = await fetch(
+//       "https://jsonplaceholder.typicode.com/posts/5",
+//       {
+//         method: "PUT",
+//         headers: { "content-type": "application/json" },
+//         body: JSON.stringify({
+//           userId: 5,
+//           title: "This is the Updated Post 5 Title",
+//           body: "This is the updated body content of the post",
+//         }),
+//       },
+//     );
+//     if (!response.ok) {
+//       throw new Error(`Something went wrong Status : ${response.status}`);
+//     }
+//     const post = await response.json();
+
+//     console.log("Updated Content below:", post);
+//   } catch (error) {
+//     console.log(`something went wrong : ${error}`);
+//   }
+// }
+// putPost();
+async function putPost() {
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/5",
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          userId: 5,
+          title: "This is the Updated Post 5 Title",
+          body: "This is the updated body content of the post",
+        }),
+      },
+    );
+    if (!response.ok) {
+      throw new Error(`Something went wrong Status : ${response.status}`);
+    }
+    const post = await response.json();
+
+    console.log("Updated Content below:", post);
+  } catch (error) {
+    console.log(`something went wrong : ${error}`);
+  }
+}
+putPost();
