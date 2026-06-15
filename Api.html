@@ -1,33 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Api integrations testing</title>
-</head>
+<html>
 
 <body>
-    <h1 id="name">Loading.....</h1>
-    <p id="email"></p>
-    <p id="city"></p>
 
+    <div id="login-section">
+        <h2>Login</h2>
+        <input id="email-input" type="email" placeholder="Email" />
+        <input id="password-input" type="password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+        <div id="error-msg" style="color:red"></div>
+    </div>
+
+    <div id="profile-section" style="display:none">
+        <h2>Welcome!</h2>
+        <div id="user-name"></div>
+        <div id="user-email"></div>
+        <button onclick="logout()">Logout</button>
+    </div>
 
     <script>
-        async function getUser() {
+        async function login() {
+            const email = document.getElementById('email-input').value
+            const password = document.getElementById('password-input').value
+            const errorBox = document.getElementById('error-msg')
+            errorBox.textContent = ''
 
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts/1')
-            const user = await response.json()
+            try {
+                const res = await fetch('https://omnidentai-crm.onrender.com/auth/login', {  // ✅ fixed
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                })
 
-            // data put into HTML 
-            document.getElementById("name").textContent = user.name
-            document.getElementById("email").textContent = user.email
-            document.getElementById("city").textContent = user.address.city
+                if (res.status === 401) {
+                    errorBox.textContent = 'Invalid credentials! Check email and password.'
+                    return
+                }
+                if (!res.ok) throw new Error(`Something went wrong: ${res.status}`)
 
+                const data = await res.json()
+                const token = data.token || data.accessToken
+                localStorage.setItem('token', token)
+
+                document.getElementById('login-section').style.display = 'none'
+                document.getElementById('profile-section').style.display = 'block'
+
+                getProfile()
+
+            } catch (e) {
+                errorBox.textContent = e.message
+            }
         }
-        getUser();
-    </script>
-</body>
 
+        async function getProfile() {
+            const token = localStorage.getItem('token')
+            if (!token) {
+                document.getElementById('error-msg').textContent = 'You must login first!'
+                return
+            }
+
+            try {
+                const res = await fetch('https://omnidentai-crm.onrender.com/auth/me', {  // ✅ fixed
+                    headers: { 'Authorization': `Bearer ${token}` }
+                })
+
+                if (res.status === 401) {
+                    document.getElementById('error-msg').textContent = 'Unauthorized! Please login again.'
+                    return
+                }
+                if (!res.ok) throw new Error(`Profile error: ${res.status}`)
+
+                const user = await res.json()
+                document.getElementById('user-name').textContent = 'Name: ' + user.name   // ✅ fixed
+                document.getElementById('user-email').textContent = 'Email: ' + user.email  // ✅ fixed
+
+            } catch (e) {
+                document.getElementById('error-msg').textContent = e.message
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token')  // ✅ fixed
+            document.getElementById('login-section').style.display = 'block'
+            document.getElementById('profile-section').style.display = 'none'
+        }
+    </script>
+
+</body>
 
 </html>

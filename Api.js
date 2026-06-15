@@ -406,3 +406,60 @@
 //   }
 // }
 // DelPost();
+
+// test.js — run with: node test.js
+// async function login() {
+//   try {
+//     const res = await fetch("https://omnidentai-crm.onrender.com/auth/login", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         email: "iqra@example.com",
+//         password: "StrongPass123",
+//       }),
+//     });
+
+//     const data = await res.json();
+//     console.log("Login response:", data);
+//     console.log("Token:", data.token || data.accessToken);
+//   } catch (e) {
+//     console.log("Error:", e.message);
+//   }
+// }
+
+// login();
+
+// async function wakeServer() {
+//   console.log("Waking server up... please wait");
+
+//   for (let i = 1; i <= 5; i++) {
+//     const res = await fetch("https://omnidentai-crm.onrender.com/");
+//     console.log(`Attempt ${i} — Status: ${res.status}`);
+//     await new Promise((r) => setTimeout(r, 10000)); // wait 10 seconds between tries
+//   }
+// }
+
+// wakeServer();
+
+// findApi.js
+async function tryUrl(url) {
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    console.log(`\n--- ${url}`);
+    console.log("Status:", res.status);
+    console.log("Response:", text.slice(0, 100));
+  } catch (e) {
+    console.log(`\n--- ${url}`);
+    console.log("Error:", e.message);
+  }
+}
+
+async function run() {
+  await tryUrl("https://omnidentai-crm.onrender.com/");
+  await tryUrl("https://omnidentai-crm.onrender.com/auth/login");
+  await tryUrl("https://omnidentai-crm.onrender.com/api/auth/login");
+  await tryUrl("https://omnidentai-crm.onrender.com/login");
+}
+
+run();
