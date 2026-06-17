@@ -26,7 +26,7 @@
             errorBox.textContent = ''
 
             try {
-                const res = await fetch('https://omnidentai-crm.onrender.com/auth/login', {  // ✅ fixed
+                const res = await fetch('http://localhost:5000/auth/login', {  // ✅ fixed
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -60,7 +60,7 @@
             }
 
             try {
-                const res = await fetch('https://omnidentai-crm.onrender.com/auth/me', {  // ✅ fixed
+                const res = await fetch('http://localhost:5000/auth/me', {  // ✅ fixed
                     headers: { 'Authorization': `Bearer ${token}` }
                 })
 
