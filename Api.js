@@ -442,24 +442,59 @@
 // wakeServer();
 
 // findApi.js
-async function tryUrl(url) {
+// async function tryUrl(url) {
+//   try {
+//     const res = await fetch(url);
+//     const text = await res.text();
+//     console.log(`\n--- ${url}`);
+//     console.log("Status:", res.status);
+//     console.log("Response:", text.slice(0, 100));
+//   } catch (e) {
+//     console.log(`\n--- ${url}`);
+//     console.log("Error:", e.message);
+//   }
+// }
+
+// async function run() {
+//   await tryUrl("https://omnidentai-crm.onrender.com/");
+//   await tryUrl("https://omnidentai-crm.onrender.com/auth/login");
+//   await tryUrl("https://omnidentai-crm.onrender.com/api/auth/login");
+//   await tryUrl("https://omnidentai-crm.onrender.com/login");
+// }
+
+// run();
+
+// practice-auth.js
+async function login() {
   try {
-    const res = await fetch(url);
-    const text = await res.text();
-    console.log(`\n--- ${url}`);
-    console.log("Status:", res.status);
-    console.log("Response:", text.slice(0, 100));
+    const res = await fetch("https://reqres.in/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: "eve.holt@reqres.in",
+        password: "cityslicka",
+      }),
+    });
+
+    const data = await res.json();
+    console.log("Login response:", data);
+    console.log("Token:", data.token);
+
+    // Now use the token
+    await getProfile(data.token);
   } catch (e) {
-    console.log(`\n--- ${url}`);
     console.log("Error:", e.message);
   }
 }
 
-async function run() {
-  await tryUrl("https://omnidentai-crm.onrender.com/");
-  await tryUrl("https://omnidentai-crm.onrender.com/auth/login");
-  await tryUrl("https://omnidentai-crm.onrender.com/api/auth/login");
-  await tryUrl("https://omnidentai-crm.onrender.com/login");
+async function getProfile(token) {
+  const res = await fetch("https://reqres.in/api/users/2", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const data = await res.json();
+  console.log("\nProfile:", data.data);
+  console.log("Name:", data.data.first_name, data.data.last_name);
+  console.log("Email:", data.data.email);
 }
 
-run();
+login();
